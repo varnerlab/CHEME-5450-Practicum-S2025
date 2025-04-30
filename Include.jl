@@ -2,6 +2,7 @@
 const _ROOT = @__DIR__
 const _PATH_TO_SRC = joinpath(_ROOT, "src");
 const _PATH_TO_DATA = joinpath(_ROOT, "data");
+const _PATH_TO_CONFIGURATION = joinpath(_ROOT, "configuration");
 
 # flag to check if the include file was called -
 const _DID_INCLUDE_FILE_GET_CALLED = true;
@@ -13,8 +14,8 @@ if (isfile(joinpath(_ROOT, "Manifest.toml")) == false) # have manifest file, we 
 end
 
 # load external packages
+using DelimitedFiles
 using JSON
-using HTTP
 using DataFrames
 using JLD2
 using CSV
@@ -31,3 +32,5 @@ include(joinpath(_PATH_TO_SRC, "Types.jl"));
 include(joinpath(_PATH_TO_SRC, "Factory.jl"));
 include(joinpath(_PATH_TO_SRC, "Parser.jl"));
 include(joinpath(_PATH_TO_SRC, "Flux.jl"));
+include(joinpath(_PATH_TO_SRC, "Files.jl"));
+include(joinpath(_PATH_TO_SRC, "Sequence.jl"));
