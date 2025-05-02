@@ -4,6 +4,17 @@ function +(buffer::Array{String,1}, line::String)
     push!(buffer, line)
 end
 
+"""
+    read_reaction_file(path_to_file::String) -> Array{String,1}
+
+Read in a VFF formatted reaction file and return the reaction lines as an array of strings.
+
+### Arguments
+- `path_to_file::String`: The path to the VFF formatted reaction file.
+
+### Returns
+- `Array{String,1}`: An array of strings containing the reaction lines from the file.
+"""
 function read_reaction_file(path_to_file::String)::Array{String,1}
 
     # initialize -

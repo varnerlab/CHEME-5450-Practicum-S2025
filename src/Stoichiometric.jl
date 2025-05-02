@@ -35,6 +35,40 @@ function _extract_species_dictionary(reaction_phrase::String;
 	return species_symbol_dictionary
 end
 
+function _extract_species_symbols_set(reaction_phrase::String)::Set{String}
+
+	# initialize -
+	species_symbol_set = Set{String}();
+	
+	# ok, do we hve a +?
+	component_array = split(reaction_phrase,'+');
+	for component ∈ component_array
+
+		if (contains(component,'*') == true)
+			
+			tmp_array = split(component,'*')
+			species_symbol = String(tmp_array[2])
+
+			# don't cache the ∅ -
+			if (species_symbol != "∅" && species_symbol != "[]")
+				push!(species_symbol_set, species_symbol)
+			end
+		else 
+			
+			# strip any spaces -
+			species_symbol = component |> lstrip |> rstrip
+
+			# don't cache the ∅ -
+			if (species_symbol != "∅" && species_symbol != "[]")
+				push!(species_symbol_set, species_symbol)
+			end
+		end
+	end
+
+	# return -
+	return species_symbol_set
+end
+
 function _expand_reversible_reactions(reaction_array::Array{String,1})::Array{String,1}
 
     # initialize -

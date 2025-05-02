@@ -33,4 +33,5 @@ include(joinpath(_PATH_TO_SRC, "Factory.jl"));
 include(joinpath(_PATH_TO_SRC, "Parser.jl"));
 include(joinpath(_PATH_TO_SRC, "Flux.jl"));
 include(joinpath(_PATH_TO_SRC, "Files.jl"));
+include(joinpath(_PATH_TO_SRC, "Stoichiometric.jl"));
 include(joinpath(_PATH_TO_SRC, "Sequence.jl"));

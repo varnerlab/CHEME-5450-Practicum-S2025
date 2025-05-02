@@ -212,4 +212,42 @@ function translation(sequence::String; mrnaprefix::String = "mRNA", proteinprefi
   
     return reactions;
 end
+
+function exchangereactions(reactions::Vector{String})::Array{String,1}
+    
+    # initialize -
+    exchange_reactions = Vector{String}(); # reactions that hold the exchange reactions
+    global_species_set = Set{String}(); # global species set -
+    
+
+    # process the reactions -
+    reaction_species_set = nothing;
+    for reaction ∈ reactions
+        
+      # split the reaction -
+      component_array = split(reaction,',');
+      reactants = component_array[2] |> String; # reactants
+      products = component_array[3] |> String; # products
+
+      # process the reaction, and product sets -
+      reactant_set = _extract_species_symbols_set(reactants);
+      product_set = _extract_species_symbols_set(products);
+      reaction_species_set = reactant_set ∪ product_set; # union of the two sets
+      global_species_set = global_species_set ∪ reaction_species_set;
+    end
+
+    # convert the set to an array -
+    global_species_array = global_species_set |> collect |> sort;
+
+    # build the exchange reactions -
+    for species ∈ global_species_array
+  
+      # build the exchange reaction -
+      "exchange_$(species),[],$(species),true" |> s-> push!(exchange_reactions, s);
+    end
+  
+    # return -
+    return exchange_reactions;
+end
+
 # -- PUBLIC METHODS ABOVE HERE ----------------------------------------------------------------------------------- #
