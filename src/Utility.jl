@@ -1,4 +1,3 @@
-# -- PRIVATE HELPER METHODS ------------------------------------------------------------------------------- #
 function compute_transcription_rate(parameter_dictionary::Dict{Symbol,Any})
 
     # compute rX_hat bound -
@@ -137,4 +136,3 @@ function generate_parameter_dictionary(path_to_parameter_file::String)
     return parameter_dictionary
     # ========================================================================= #
 end
-# -- PRIVATE HELPER METHODS ------------------------------------------------------------------------------- #
