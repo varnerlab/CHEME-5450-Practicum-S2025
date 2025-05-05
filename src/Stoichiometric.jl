@@ -219,14 +219,7 @@ function build_default_bounds_array(reactions::Array{String,1}; defaultbound::Fl
 		
 		# split the reaction string -
 		component_array = split(reaction,',');
-		lower_bound = component_array[4] # old style bounds
-
-		# old style bounds -
-		isreversible = false;
-		if lower_bound == "-inf"
-			isreversible = true;
-		end
-		
+		isreversible = component_array[4] |> String |> b-> parse(Bool,b) # new style bounds -
 		if (isreversible == true)
 			fluxbounds[index,1] = -defaultbound;
 			fluxbounds[index,2] = defaultbound;
